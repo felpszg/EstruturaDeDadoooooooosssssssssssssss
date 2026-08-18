@@ -47,7 +47,9 @@ public class Principal{
         System.out.println(obj2.toString());
 
         
-        
+        obj4.getEnd().setBairro("piyio");
+        obj4.getEnd().setNomeRua("paado");
+        obj4.getEnd().setNumero(12);
 
     }
 }
