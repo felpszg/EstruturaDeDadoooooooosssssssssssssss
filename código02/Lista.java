@@ -14,6 +14,59 @@ public class Lista<T>{
         this.ultimoNo = null;
     }
 
+    public void addInicio(T dado){
+        No<T> novoNo = new No<T>(dado);
+        if(primeiroNo == null){
+            primeiroNo = novoNo;
+            ultimoNo = novoNo;
+        }
+        else{
+            novoNo.setNextNo(primeiroNo);
+            primeiroNo = novoNo;
+        }
+
+    }
+
+    public void removeInicio(){
+        if (primeiroNo ==null) {
+            System.out.println("Não tem primeiro nó");
+        }
+        else {
+             System.out.println("o dado:"+primeiroNo.getDado()+ "foi obliterado");
+            if(primeiroNo==ultimoNo){
+                primeiroNo = null;
+                ultimoNo = null;
+            }else{
+            primeiroNo = primeiroNo.getNextNo();
+        }
+    }  
+}
+
+    public void imprimeLista(){
+        if (primeiroNo == null) {
+            System.out.println("Vazio.");
+        }else{
+            System.out.println("Nome da lista:"+getNomeLista());
+            No<T> aux = primeiroNo;
+        while( aux != null) {
+            System.out.println(aux.getDado());
+            aux = aux.getNextNo();
+        }
+       }
+    }
+    
+    
+
+
+
+
+
+
+
+
+
+
+
     public void setNomeLista(String nome){
         this.nomeLista = nome;
     }

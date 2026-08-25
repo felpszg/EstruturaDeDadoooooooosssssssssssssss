@@ -31,4 +31,8 @@ public class No<T>{
     public No<T> getNextNo(){
         return this.nextNo;
     }
+    @Override
+    public String toString(){
+        return "{dado: "+getDado()+"}";
+    }
 }
