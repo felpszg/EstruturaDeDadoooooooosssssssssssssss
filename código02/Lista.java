@@ -1,11 +1,11 @@
 package código02;
 public class Lista<T>{
+    private String nomeLista;
     private No<T> primeiroNo;
     private No<T> ultimoNo;
-    private String nomeLista;
 
     public Lista(){
-        this("Lista");
+        this(null);
     }
 
     public Lista(String nomeLista){
@@ -16,60 +16,88 @@ public class Lista<T>{
 
     public void addInicio(T dado){
         No<T> novoNo = new No<T>(dado);
+
         if(primeiroNo == null){
             primeiroNo = novoNo;
             ultimoNo = novoNo;
-        }
-        else{
+        } else {
             novoNo.setNextNo(primeiroNo);
             primeiroNo = novoNo;
         }
-
     }
 
     public void removeInicio(){
-        if (primeiroNo ==null) {
-            System.out.println("Não tem primeiro nó");
+        if(primeiroNo == null){
+            System.out.println("Lista vazia!");
+        } else {
+            System.out.println("Dado: " + primeiroNo.getDado() + " removido!");
+
+            if(primeiroNo == ultimoNo){
+                primeiroNo = primeiroNo.getNextNo();
+                ultimoNo = ultimoNo.getNextNo();
+            } else {
+                primeiroNo = primeiroNo.getNextNo();
+            }
         }
-        else {
-             System.out.println("o dado:"+primeiroNo.getDado()+ "foi obliterado");
-            if(primeiroNo==ultimoNo){
-                primeiroNo = null;
-                ultimoNo = null;
-            }else{
-            primeiroNo = primeiroNo.getNextNo();
+    }
+
+
+    public void addFinal(T dado){
+        No<T> novoNo = new No<T>(dado);
+
+        if(primeiroNo == null){
+            primeiroNo = novoNo;
+            ultimoNo = novoNo;
+        } else {
+            ultimoNo.setNextNo(novoNo);
+            ultimoNo = novoNo;
         }
-    }  
-}
+    }
+
+    public void removeFinal(){
+        if (primeiroNo == null) {
+            System.out.println("Lista vazia!");
+        }else{
+            System.out.println("Dado: " + ultimoNo.getDado() + " removido!");
+            if(primeiroNo == ultimoNo){
+                primeiroNo = primeiroNo.getNextNo();
+                ultimoNo = ultimoNo.getNextNo();
+            } else {
+                No<T> aux = primeiroNo;
+                
+                while(aux.getNextNo() != ultimoNo){
+                    aux = aux.getNextNo();
+                }
+                ultimoNo = aux;
+                aux.setNextNo(null);
+            }
+        }
+    }
+
+
+
+    
 
     public void imprimeLista(){
-        if (primeiroNo == null) {
-            System.out.println("Vazio.");
-        }else{
-            System.out.println("Nome da lista:"+getNomeLista());
+        if(primeiroNo == null){
+            System.out.println("Lista vazia!");
+        } else{
+            System.out.println("Dados da Lista " + getNomeLista());
             No<T> aux = primeiroNo;
-        while( aux != null) {
-            System.out.println(aux.getDado());
-            aux = aux.getNextNo();
+            while (aux != null) {
+                System.out.println(aux.toString());
+                aux = aux.getNextNo();
+            }
         }
-       }
     }
-    
-    
 
 
 
 
-
-
-
-
-
-
-
-    public void setNomeLista(String nome){
-        this.nomeLista = nome;
+    public void setNomeLista(String nomeLista){
+        this.nomeLista = nomeLista;
     }
+
     public String getNomeLista(){
         return this.nomeLista;
     }
@@ -77,6 +105,7 @@ public class Lista<T>{
     public void setPrimeiroNo(No<T> primeiroNo){
         this.primeiroNo = primeiroNo;
     }
+
     public No<T> getPrimeiroNo(){
         return this.primeiroNo;
     }
