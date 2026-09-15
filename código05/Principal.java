@@ -6,7 +6,9 @@ public class Principal{
         ListaDupla<String> lista = new ListaDupla<String>("Alunos");
         lista.addInicio("Felps");
         lista.addInicio("Joao");
+        lista.addInicio("Felipeira");
+        lista.addInicio("Tiahos");
+        System.out.println(lista.removeMeio(1));
         lista.imprimeLista();
-        System.out.println("dado explodido: "+lista.removeInicio());
+}     
     }
-}

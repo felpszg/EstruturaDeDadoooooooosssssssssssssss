@@ -106,12 +106,13 @@ public class ListaDupla<T> {
         }
     }
 
-    public void addMeio(T dado,int posicao){
-        if(posicao==0){
+    public void addMeio(T dado, int posicao){
+        if(posicao <= 0){
             addInicio(dado);
             return;
         }
-        if (posicao>= tamanho) {
+
+        if(posicao >= tamanho){
             addFinal(dado);
             return;
         }
@@ -120,12 +121,47 @@ public class ListaDupla<T> {
         NoDuplo<T> atual = primeiroNo;
         int indice = 0;
 
-        while (atual != null && indice < posicao) {
+        while (atual != null && indice < posicao) { 
             atual = atual.getProximoNo();
+            indice++;
         }
+
+        novoNo.setProximoNo(atual);
+        novoNo.setAnteriorNo(atual.getAnteriorNo());
+        novoNo.getAnteriorNo().setProximoNo(novoNo);
+        novoNo.getProximoNo().setAnteriorNo(novoNo);
+        atualizaIndice();
+        tamanho++;    
     }
 
 
+
+
+    public T removeMeio(int posicao){
+        T dadoTemp;
+        if(posicao<=0){
+            dadoTemp = removeInicio();
+            return dadoTemp;
+        }
+        if(posicao>=tamanho-1){
+            dadoTemp = removeFinal();
+            return dadoTemp;
+        }
+
+        NoDuplo<T> atual = primeiroNo;
+        int indice = 0;
+        while (atual != null && indice < posicao) {
+            atual = atual.getProximoNo();
+            indice++;
+        }
+        dadoTemp = atual.getDado();
+        atual.getAnteriorNo().setProximoNo(atual.getProximoNo());
+        atual.getProximoNo().setAnteriorNo(atual.getAnteriorNo());
+        
+        atualizaIndice();
+        tamanho--;
+        return dadoTemp;
+    }
 
 
 }
